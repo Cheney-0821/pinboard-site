@@ -3,40 +3,79 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PinBoard - Desktop Pin Card Tool</title>
-  <meta name="description" content="PinBoard turns screenshots, images, and text into always-on-top reference cards.">
+  <title>PinBoard - 妗岄潰缃《鍗＄墖宸ュ叿</title>
+  <meta name="description" content="PinBoard 鏄竴涓交閲忔闈㈢疆椤跺崱鐗囧伐鍏凤紝鐢ㄤ簬鎶婃埅鍥俱€佸浘鐗囧拰鏂囨湰蹇€熷彉鎴愬彲缃《鍙傝€冨崱鐗囥€?>
+  <link rel="icon" href="assets/pinboard-icon.svg" type="image/svg+xml">
   <style>
-    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; background: #f6f7f9; color: #1f2328; }
-    .page { max-width: 920px; margin: 0 auto; padding: 72px 24px; }
-    .hero { background: #fff; border: 1px solid #e5e7eb; border-radius: 24px; padding: 44px; box-shadow: 0 24px 80px rgba(15,23,42,0.08); }
-    h1 { margin: 0; font-size: 44px; letter-spacing: -0.04em; }
-    .subtitle { margin-top: 16px; font-size: 20px; line-height: 1.7; color: #4b5563; }
-    .actions { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
-    .button { display: inline-flex; align-items: center; justify-content: center; height: 46px; padding: 0 20px; border-radius: 999px; background: #111827; color: #fff; text-decoration: none; font-weight: 600; }
-    .button.secondary { background: #eef2f7; color: #111827; }
-    .note { margin-top: 14px; color: #6b7280; font-size: 14px; }
-    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-top: 24px; }
-    .card { background: #fff; border: 1px solid #e5e7eb; border-radius: 18px; padding: 20px; }
-    .card h2 { margin: 0 0 10px; font-size: 18px; }
-    .card p { margin: 0; color: #4b5563; line-height: 1.6; }
+    :root { --bg: #f6f7fb; --card: #ffffff; --text: #111827; --muted: #5b6472; --line: #e5e7eb; --dark: #111827; --blue: #2563eb; --soft-blue: #eff6ff; --shadow: 0 30px 90px rgba(15,23,42,0.10); }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; color: var(--text); background: radial-gradient(circle at 10% 0%, rgba(37,99,235,0.14), transparent 30%), radial-gradient(circle at 90% 10%, rgba(167,139,250,0.16), transparent 28%), var(--bg); }
+    a { color: inherit; }
+    .page { max-width: 1120px; margin: 0 auto; padding: 32px 22px 64px; }
+    .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 42px; }
+    .brand { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 18px; }
+    .brand img { width: 36px; height: 36px; }
+    .nav-links { display: flex; align-items: center; gap: 18px; color: var(--muted); font-size: 14px; }
+    .nav-links a { text-decoration: none; }
+    .hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 34px; align-items: center; padding: 42px; background: rgba(255,255,255,0.82); border: 1px solid rgba(229,231,235,0.9); border-radius: 34px; box-shadow: var(--shadow); backdrop-filter: blur(16px); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: var(--soft-blue); color: var(--blue); font-size: 13px; font-weight: 700; margin-bottom: 18px; }
+    h1 { margin: 0; font-size: clamp(40px, 6vw, 70px); line-height: 0.98; letter-spacing: -0.06em; }
+    .subtitle { margin: 22px 0 0; color: var(--muted); font-size: 20px; line-height: 1.75; }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+    .button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 22px; border-radius: 999px; text-decoration: none; font-weight: 800; transition: transform 0.16s ease, box-shadow 0.16s ease; }
+    .button:hover { transform: translateY(-1px); }
+    .button.primary { background: var(--dark); color: #fff; box-shadow: 0 16px 34px rgba(17,24,39,0.20); }
+    .button.secondary { background: #fff; border: 1px solid var(--line); color: var(--text); }
+    .download-note { margin-top: 14px; color: #6b7280; font-size: 13px; line-height: 1.6; }
+    .preview { width: 100%; border-radius: 26px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 0 22px 60px rgba(15,23,42,0.10); }
+    .preview img { display: block; width: 100%; height: auto; }
+    .section { margin-top: 34px; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 24px; box-shadow: 0 12px 34px rgba(15,23,42,0.05); }
+    .card h2 { margin: 0 0 10px; font-size: 20px; letter-spacing: -0.02em; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.7; }
+    .info { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
+    .info-item { padding: 16px; background: #fff; border: 1px solid var(--line); border-radius: 20px; }
+    .info-label { font-size: 12px; color: var(--muted); }
+    .info-value { margin-top: 6px; font-weight: 800; }
+    .footer { margin-top: 32px; color: var(--muted); text-align: center; font-size: 13px; line-height: 1.7; }
+    @media (max-width: 860px) { .hero { grid-template-columns: 1fr; padding: 28px; } .grid, .info { grid-template-columns: 1fr; } .nav { align-items: flex-start; flex-direction: column; } }
   </style>
 </head>
 <body>
   <main class="page">
-    <section class="hero">
-      <h1>PinBoard</h1>
-      <p class="subtitle">Turn screenshots, images, and text into always-on-top desktop reference cards. Ideal for design reference, writing, and multi-window work.</p>
-      <div class="actions">
-        <a class="button" href="https://github.com/Cheney-0821/pinboard-site/releases/latest/download/PinBoardSetup.exe">Download PinBoard</a>
-        <a class="button secondary" href="https://github.com/Cheney-0821/pinboard-site">View on GitHub</a>
+    <nav class="nav">
+      <div class="brand"><img src="assets/pinboard-icon.svg" alt="PinBoard icon"><span>PinBoard</span></div>
+      <div class="nav-links"><a href="#features">鍔熻兘</a><a href="#download">涓嬭浇</a><a href="https://github.com/Cheney-0821/pinboard-site">GitHub</a></div>
+    </nav>
+    <section class="hero" id="download">
+      <div>
+        <div class="eyebrow">Windows - v0.1.0</div>
+        <h1>鎶婁换浣曞唴瀹归拤鍦ㄦ闈笂銆?/h1>
+        <p class="subtitle">PinBoard 鍙互鎶婃埅鍥俱€佸浘鐗囧拰鏂囨湰蹇€熷彉鎴愬彲缃《鍗＄墖锛岄€傚悎璁捐鍙傝€冦€佸啓浣滃鐓с€佸绐楀彛淇℃伅鏆傚瓨銆?/p>
+        <div class="actions">
+          <a class="button primary" href="https://github.com/Cheney-0821/pinboard-site/releases/latest/download/PinBoardSetup.exe" download>鍏嶈垂涓嬭浇 PinBoard</a>
+          <a class="button secondary" href="https://github.com/Cheney-0821/pinboard-site">鏌ョ湅鍏紑浠撳簱</a>
+        </div>
+        <p class="download-note">瀹夎鍖呯害 50.9 MB锛宻elf-contained 鐗堟湰锛屾棤闇€鍗曠嫭瀹夎 .NET Runtime銆俁elease 涓婁紶鍓嶄笅杞芥寜閽彲鑳芥殏鏃朵笉鍙敤銆?/p>
       </div>
-      <p class="note">v0.1.0 download coming soon. The button will work once a Release is uploaded.</p>
+      <div class="preview"><img src="assets/preview-card.svg" alt="PinBoard preview"></div>
     </section>
-    <section class="grid">
-      <div class="card"><h2>Screenshot to Card</h2><p>Select a screen region, and a draggable, zoomable, always-on-top card appears at that spot.</p></div>
-      <div class="card"><h2>Clipboard to Card</h2><p>Copy an image, image file, or text, then use a hotkey to create a card instantly.</p></div>
-      <div class="card"><h2>Lightweight & Persistent</h2><p>System tray, single instance, customizable global hotkeys, and local settings persistence.</p></div>
+    <section class="section info">
+      <div class="info-item"><div class="info-label">褰撳墠鐗堟湰</div><div class="info-value">v0.1.0</div></div>
+      <div class="info-item"><div class="info-label">绯荤粺</div><div class="info-value">Windows x64</div></div>
+      <div class="info-item"><div class="info-label">杩愯鏂瑰紡</div><div class="info-value">鎵樼洏甯搁┗</div></div>
+      <div class="info-item"><div class="info-label">瀹夎鍖?/div><div class="info-value">绾?50.9 MB</div></div>
     </section>
+    <section class="section grid" id="features">
+      <div class="card"><h2>鎴浘鍒涘缓鍗＄墖</h2><p>妗嗛€夊睆骞曞尯鍩熷悗锛屽湪鍘熶綅缃敓鎴愬彲鎷栧姩銆佸彲缂╂斁銆佸彲缃《鐨勬埅鍥惧崱鐗囥€?/p></div>
+      <div class="card"><h2>鍓创鏉胯嚜鍔ㄥ垽鏂?/h2><p>澶嶅埗鍥剧墖銆佸浘鐗囨枃浠舵垨鏂囨湰鍚庯紝鐢ㄥ揩鎹烽敭鐩存帴鍒涘缓瀵瑰簲鍗＄墖銆?/p></div>
+      <div class="card"><h2>鍥剧墖澶勭悊</h2><p>鏀寔寰俊鍥剧墖澶嶅埗鍏煎銆丒XIF 鏂瑰悜鏍℃銆侀『鏃堕拡鏃嬭浆鍜屾棆杞悗澶嶅埗銆?/p></div>
+      <div class="card"><h2>鏂囨湰鍙傝€?/h2><p>鏂囨湰鍗＄墖鏀寔缂栬緫銆侀€夋嫨澶嶅埗銆佸鍒跺叏鏂囥€佹粴鍔ㄣ€佺缉鏀惧拰璋冩暣澶у皬銆?/p></div>
+      <div class="card"><h2>蹇嵎閿?/h2><p>鏀寔鑷畾涔夊叏灞€蹇嵎閿紝涔熷彲缁戝畾 F9銆丠ome銆丳ause 绛夊崟閿€?/p></div>
+      <div class="card"><h2>鎵惧洖鍗＄墖</h2><p>鍗＄墖杩囧ぇ鎴栬窇鍑哄睆骞曟椂锛屽彲涓€閿壘鍥炴墍鏈夊崱鐗囥€?/p></div>
+    </section>
+    <footer class="footer">PinBoard 褰撳墠涓昏鍦ㄦ湰鍦拌繍琛岋紝涓嶄笂浼犳埅鍥俱€佸浘鐗囨垨鏂囨湰銆?br>瀹夎鍖呴€氳繃 GitHub Release 鍒嗗彂锛屼笅杞芥寜閽娇鐢ㄥ浐瀹?latest asset 閾炬帴銆?/footer>
   </main>
 </body>
 </html>

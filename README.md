@@ -2,16 +2,16 @@
 
 PinBoard is a lightweight desktop pin-card tool that turns screenshots, images, and text into always-on-top reference cards.
 
-Use it for:
-- Pinning design references
-- Keeping writing notes visible
-- Multi-window comparison
-- Temporary screen capture storage
-- Quick clipboard-to-card conversion
+## Download
 
-## Current Version
+Current version: v0.1.0
 
-v0.1.0
+Fixed download link:
+```
+https://github.com/Cheney-0821/pinboard-site/releases/latest/download/PinBoardSetup.exe
+```
+
+Visit [cheney-0821.github.io/pinboard-site](https://cheney-0821.github.io/pinboard-site/) for the download page.
 
 ## Features
 
@@ -28,24 +28,16 @@ v0.1.0
 - Settings persistence
 - System tray with single instance
 
-## Download
+## System
 
-The download page is being prepared.
-
-The permanent download link will be:
-
-```
-https://github.com/Cheney-0821/pinboard-site/releases/latest/download/PinBoardSetup.exe
-```
-
-## Repository Note
-
-This is the public site and release asset repository. Full source code is kept in a private repository.
+- Windows x64
+- Self-contained installer (~50.9 MB)
+- No separate .NET Runtime required
 
 ## Privacy
 
-PinBoard runs locally:
-- No account required
-- No upload of screenshots, images, or text
-- Settings stored locally in your user directory
-- Installer distributed via GitHub Release
+PinBoard runs locally. No account required. No uploads. Settings stored locally.
+
+## Repository Note
+
+This is the public site and release asset repository. Full source code is in a private repository.
