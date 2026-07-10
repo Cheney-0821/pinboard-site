@@ -3,31 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PinBoard - &#26700;&#38754;&#32622;&#39030;&#21345;&#29255;&#24037;&#20855;</title>
-  <meta name="description" content="PinBoard&#26159;&#19968;&#20010;&#36731;&#37327;&#26700;&#38754;&#32622;&#39030;&#21345;&#29255;&#24037;&#20855;&#65292;&#29992;&#20110;&#25226;&#25130;&#22270;&#12289;&#22270;&#29255;&#21644;&#25991;&#26412;&#24555;&#36895;&#21464;&#25104;&#21487;&#32622;&#39030;&#21442;&#32771;&#21345;&#29255;&#12290;">
-  <link rel="icon" href="assets/pinboard-icon.svg" type="image/svg+xml">
+  <title>PinBoard - 桌面置顶卡片工具</title>
+  <meta name="description" content="PinBoard 是一个轻量桌面置顶卡片工具，用于把截图、图片和文本快速变成可置顶参考卡片。">
+  <link rel="icon" href="assets/app-icon.ico" type="image/x-icon">
   <style>
-    :root {
-      --bg: #f6f7fb;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #5b6472;
-      --line: #e5e7eb;
-      --dark: #111827;
-      --blue: #2563eb;
-      --soft-blue: #eff6ff;
-      --shadow: 0 30px 90px rgba(15, 23, 42, 0.10);
-    }
+    :root { --bg: #f6f7fb; --card: #ffffff; --text: #111827; --muted: #5b6472; --line: #e5e7eb; --dark: #111827; --blue: #2563eb; --soft-blue: #eff6ff; --shadow: 0 30px 90px rgba(15,23,42,0.10); }
     * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
-      color: var(--text);
-      background:
-        radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.14), transparent 30%),
-        radial-gradient(circle at 90% 10%, rgba(167, 139, 250, 0.16), transparent 28%),
-        var(--bg);
-    }
+    body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif; color: var(--text); background: radial-gradient(circle at 10% 0%, rgba(37,99,235,0.14), transparent 30%), radial-gradient(circle at 90% 10%, rgba(167,139,250,0.16), transparent 28%), var(--bg); }
     a { color: inherit; }
     .page { max-width: 1120px; margin: 0 auto; padding: 32px 22px 64px; }
     .nav { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 42px; }
@@ -35,43 +17,21 @@
     .brand img { width: 36px; height: 36px; }
     .nav-links { display: flex; align-items: center; gap: 18px; color: var(--muted); font-size: 14px; }
     .nav-links a { text-decoration: none; }
-    .hero {
-      display: grid;
-      grid-template-columns: 1.05fr 0.95fr;
-      gap: 34px;
-      align-items: center;
-      padding: 42px;
-      background: rgba(255, 255, 255, 0.82);
-      border: 1px solid rgba(229, 231, 235, 0.9);
-      border-radius: 34px;
-      box-shadow: var(--shadow);
-      backdrop-filter: blur(16px);
-    }
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: var(--soft-blue);
-      color: var(--blue);
-      font-size: 13px;
-      font-weight: 700;
-      margin-bottom: 18px;
-    }
+    .hero { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 34px; align-items: center; padding: 42px; background: rgba(255,255,255,0.82); border: 1px solid rgba(229,231,235,0.9); border-radius: 34px; box-shadow: var(--shadow); backdrop-filter: blur(16px); }
+    .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 999px; background: var(--soft-blue); color: var(--blue); font-size: 13px; font-weight: 700; margin-bottom: 18px; }
     h1 { margin: 0; font-size: clamp(40px, 6vw, 70px); line-height: 0.98; letter-spacing: -0.06em; }
     .subtitle { margin: 22px 0 0; color: var(--muted); font-size: 20px; line-height: 1.75; }
     .actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
     .button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 22px; border-radius: 999px; text-decoration: none; font-weight: 800; transition: transform 0.16s ease, box-shadow 0.16s ease; }
     .button:hover { transform: translateY(-1px); }
-    .button.primary { background: var(--dark); color: #fff; box-shadow: 0 16px 34px rgba(17, 24, 39, 0.20); }
+    .button.primary { background: var(--dark); color: #fff; box-shadow: 0 16px 34px rgba(17,24,39,0.20); }
     .button.secondary { background: #fff; border: 1px solid var(--line); color: var(--text); }
     .download-note { margin-top: 14px; color: #6b7280; font-size: 13px; line-height: 1.6; }
-    .preview { width: 100%; border-radius: 26px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 0 22px 60px rgba(15, 23, 42, 0.10); }
+    .preview { width: 100%; border-radius: 26px; overflow: hidden; background: #fff; border: 1px solid var(--line); box-shadow: 0 22px 60px rgba(15,23,42,0.10); }
     .preview img { display: block; width: 100%; height: auto; }
     .section { margin-top: 34px; }
     .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-    .card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 24px; box-shadow: 0 12px 34px rgba(15, 23, 42, 0.05); }
+    .card { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 24px; box-shadow: 0 12px 34px rgba(15,23,42,0.05); }
     .card h2 { margin: 0 0 10px; font-size: 20px; letter-spacing: -0.02em; }
     .card p { margin: 0; color: var(--muted); line-height: 1.7; }
     .info { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-top: 16px; }
@@ -79,51 +39,46 @@
     .info-label { font-size: 12px; color: var(--muted); }
     .info-value { margin-top: 6px; font-weight: 800; }
     .footer { margin-top: 32px; color: var(--muted); text-align: center; font-size: 13px; line-height: 1.7; }
-    @media (max-width: 860px) {
-      .hero { grid-template-columns: 1fr; padding: 28px; }
-      .grid, .info { grid-template-columns: 1fr; }
-      .nav { align-items: flex-start; flex-direction: column; }
-    }
+    .preview-image { width: 100%; display: block; border-radius: 24px; box-shadow: 0 24px 70px rgba(15,23,42,0.24); }
+    .download-hint { margin-top: 12px; color: rgba(71,85,105,0.86); font-size: 14px; line-height: 1.7; }
+    @media (max-width: 860px) { .hero { grid-template-columns: 1fr; padding: 28px; } .grid, .info { grid-template-columns: 1fr; } .nav { align-items: flex-start; flex-direction: column; } }
   </style>
 </head>
 <body>
   <main class="page">
     <nav class="nav">
-      <div class="brand"><img src="assets/pinboard-icon.svg" alt="PinBoard icon"><span>PinBoard</span></div>
-      <div class="nav-links"><a href="#features">&#21151;&#33021;</a><a href="#download">&#19979;&#36733;</a><a href="https://github.com/Cheney-0821/pinboard-site">GitHub</a></div>
+      <div class="brand"><img src="assets/app-icon.png" alt="PinBoard"><span>PinBoard</span></div>
+      <div class="nav-links"><a href="#features">功能</a><a href="#download">下载</a><a href="https://github.com/Cheney-0821/pinboard-site">GitHub</a></div>
     </nav>
-
     <section class="hero" id="download">
       <div>
-        <div class="eyebrow">Windows &#183; v0.1.0</div>
-        <h1>&#25226;&#20219;&#20309;&#20869;&#23481;&#38025;&#22312;&#26700;&#38754;&#19978;&#12290;</h1>
-        <p class="subtitle">PinBoard &#21487;&#20197;&#25226;&#25130;&#22270;&#12289;&#22270;&#29255;&#21644;&#25991;&#26412;&#24555;&#36895;&#21464;&#25104;&#21487;&#32622;&#39030;&#21345;&#29255;&#65292;&#36866;&#21512;&#35774;&#35745;&#21442;&#32771;&#12289;&#20889;&#20316;&#23545;&#29031;&#12289;&#22810;&#31383;&#21475;&#20449;&#24687;&#26242;&#23384;&#12290;</p>
+        <div class="eyebrow">Windows - v0.1.0</div>
+        <h1>把任何内容钉在桌面上。</h1>
+        <p class="subtitle">PinBoard 可以把截图、图片和文本快速变成可置顶卡片，适合设计参考、写作对照、多窗口信息暂存。</p>
         <div class="actions">
-          <a class="button primary" href="https://github.com/Cheney-0821/pinboard-site/releases/latest/download/PinBoardSetup.exe" download>&#20813;&#36153;&#19979;&#36733; PinBoard</a>
-          <a class="button secondary" href="https://github.com/Cheney-0821/pinboard-site">&#26597;&#30475;&#20844;&#24320;&#20179;&#24211;</a>
+          <a class="button primary" href="https://github.com/Cheney-0821/pinboard-site/releases/latest/download/PinBoardSetup.exe" download>免费下载 PinBoard</a>
+          <a class="button secondary" href="https://github.com/Cheney-0821/pinboard-site">查看公开仓库</a>
         </div>
-        <p class="download-note">&#23433;&#35013;&#21253;&#32422; 50.9 MB&#65292;self-contained &#29256;&#26412;&#65292;&#26080;&#38656;&#21333;&#29420;&#23433;&#35013; .NET Runtime&#12290;Release&#19978;&#20256;&#21069;&#19979;&#36733;&#25353;&#38062;&#21487;&#33021;&#26242;&#26102;&#19981;&#21487;&#29992;&#12290;</p>
+        <p class="download-note">安装包约 50.9 MB，self-contained 版本，无需单独安装 .NET Runtime。Release 上传前下载按钮可能暂时不可用。</p>
+        <p class="download-hint">如果浏览器提示"此文件不常下载"或拦截下载，请确认来源为 Cheney-0821/pinboard-site 后选择保留或继续下载。</p>
       </div>
-      <div class="preview"><img src="assets/preview-card.svg" alt="PinBoard preview"></div>
+      <div class="preview"><img src="assets/pinboard-preview.webp" alt="PinBoard 桌面置顶预览"></div>
     </section>
-
     <section class="section info">
-      <div class="info-item"><div class="info-label">&#24403;&#21069;&#29256;&#26412;</div><div class="info-value">v0.1.0</div></div>
-      <div class="info-item"><div class="info-label">&#31995;&#32479;</div><div class="info-value">Windows x64</div></div>
-      <div class="info-item"><div class="info-label">&#36816;&#34892;&#26041;&#24335;</div><div class="info-value">&#25176;&#30424;&#24120;&#39547;</div></div>
-      <div class="info-item"><div class="info-label">&#23433;&#35013;&#21253;</div><div class="info-value">&#32422; 50.9 MB</div></div>
+      <div class="info-item"><div class="info-label">当前版本</div><div class="info-value">v0.1.0</div></div>
+      <div class="info-item"><div class="info-label">系统</div><div class="info-value">Windows x64</div></div>
+      <div class="info-item"><div class="info-label">运行方式</div><div class="info-value">托盘常驻</div></div>
+      <div class="info-item"><div class="info-label">安装包</div><div class="info-value">约 50.9 MB</div></div>
     </section>
-
     <section class="section grid" id="features">
-      <div class="card"><h2>&#25130;&#22270;&#21019;&#24314;&#21345;&#29255;</h2><p>&#26694;&#36873;&#23631;&#24149;&#21306;&#22495;&#21518;&#65292;&#22312;&#21407;&#20301;&#32622;&#29983;&#25104;&#21487;&#25302;&#21160;&#12289;&#21487;&#32553;&#25918;&#12289;&#21487;&#32622;&#39030;&#30340;&#25130;&#22270;&#21345;&#29255;&#12290;</p></div>
-      <div class="card"><h2>&#21098;&#36148;&#26495;&#33258;&#21160;&#21028;&#26029;</h2><p>&#22797;&#21046;&#22270;&#29255;&#12289;&#22270;&#29255;&#25991;&#20214;&#25110;&#25991;&#26412;&#21518;&#65292;&#29992;&#24555;&#25463;&#38190;&#30452;&#25509;&#21019;&#24314;&#23545;&#24212;&#21345;&#29255;&#12290;</p></div>
-      <div class="card"><h2>&#22270;&#29255;&#22788;&#29702;</h2><p>&#25903;&#25345;&#24494;&#20449;&#22270;&#29255;&#22797;&#21046;&#20860;&#23481;&#12289;EXIF&#26041;&#21521;&#26657;&#27491;&#12289;&#39034;&#26102;&#38024;&#26059;&#36716;&#21644;&#26059;&#36716;&#21518;&#22797;&#21046;&#12290;</p></div>
-      <div class="card"><h2>&#25991;&#26412;&#21442;&#32771;</h2><p>&#25991;&#26412;&#21345;&#29255;&#25903;&#25345;&#32534;&#36753;&#12289;&#36873;&#25321;&#22797;&#21046;&#12289;&#22797;&#21046;&#20840;&#25991;&#12289;&#28378;&#21160;&#12289;&#32553;&#25918;&#21644;&#35843;&#25972;&#22823;&#23567;&#12290;</p></div>
-      <div class="card"><h2>&#24555;&#25463;&#38190;</h2><p>&#25903;&#25345;&#33258;&#23450;&#20041;&#20840;&#23616;&#24555;&#25463;&#38190;&#65292;&#20063;&#21487;&#32465;&#23450; F9&#12289;Home&#12289;Pause&#31561;&#21333;&#38190;&#12290;</p></div>
-      <div class="card"><h2>&#25214;&#22238;&#21345;&#29255;</h2><p>&#21345;&#29255;&#36807;&#22823;&#25110;&#36305;&#20986;&#23631;&#24149;&#26102;&#65292;&#21487;&#19968;&#38190;&#25214;&#22238;&#25152;&#26377;&#21345;&#29255;&#12290;</p></div>
+      <div class="card"><h2>截图创建卡片</h2><p>框选屏幕区域后，在原位置生成可拖动、可缩放、可置顶的截图卡片。</p></div>
+      <div class="card"><h2>剪贴板自动判断</h2><p>复制图片、图片文件或文本后，用快捷键直接创建对应卡片。</p></div>
+      <div class="card"><h2>图片处理</h2><p>支持微信图片复制兼容、EXIF 方向校正、顺时针旋转和旋转后复制。</p></div>
+      <div class="card"><h2>文本参考</h2><p>文本卡片支持编辑、选择复制、复制全文、滚动、缩放和调整大小。</p></div>
+      <div class="card"><h2>快捷键</h2><p>支持自定义全局快捷键，也可绑定 F9、Home、Pause 等单键。</p></div>
+      <div class="card"><h2>找回卡片</h2><p>卡片过大或跑出屏幕时，可一键找回所有卡片。</p></div>
     </section>
-
-    <footer class="footer">PinBoard &#24403;&#21069;&#20027;&#35201;&#22312;&#26412;&#22320;&#36816;&#34892;&#65292;&#19981;&#19978;&#20256;&#25130;&#22270;&#12289;&#22270;&#29255;&#25110;&#25991;&#26412;&#12290;<br>&#23433;&#35013;&#21253;&#36890;&#36807; GitHub Release&#20998;&#21457;&#65292;&#19979;&#36733;&#25353;&#38062;&#20351;&#29992;&#22266;&#23450; latest asset&#38142;&#25509;&#12290;</footer>
+    <footer class="footer">PinBoard 当前主要在本地运行，不上传截图、图片或文本。<br>安装包通过 GitHub Release 分发，下载按钮使用固定 latest asset 链接。</footer>
   </main>
 </body>
 </html>
